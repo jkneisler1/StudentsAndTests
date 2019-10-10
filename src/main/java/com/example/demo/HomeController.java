@@ -59,7 +59,7 @@ public class HomeController {
         }
         testRepository.save(test);
 
-        return "redirect:/employeelist";
+        return "redirect:/testlist";
     }
 
     @RequestMapping("/testlist")
@@ -70,13 +70,13 @@ public class HomeController {
 
     @RequestMapping("/detail_student/{id}")
     public String showStudent(@PathVariable("id") long id, Model model) {
-        model.addAttribute("student", studentRepository.findAllById(id).get());
+        model.addAttribute("student", studentRepository.findById(id).get());
         return "showstudent";
     }
 
     @RequestMapping("/update_student/{id}")
-    public String showStudent(@PathVariable("id") long id, Model model) {
-        model.addAttribute("student", studentRepository.findAllById(id).get());
+    public String updateStudent(@PathVariable("id") long id, Model model) {
+        model.addAttribute("student", studentRepository.findById(id).get());
         return "studentform";
     }
 
@@ -88,13 +88,14 @@ public class HomeController {
 
     @RequestMapping("/detail_test/{id}")
     public String showTest(@PathVariable("id") long id, Model model) {
-        model.addAttribute("test", testRepository.findAllById(id).get());
+        model.addAttribute("test", testRepository.findById(id).get());
         return "showtest";
     }
 
     @RequestMapping("/update_test/{id}")
-    public String showStudent(@PathVariable("id") long id, Model model) {
-        model.addAttribute("test", testRepository.findAllById(id).get());
+    public String updateTest(@PathVariable("id") long id, Model model) {
+        model.addAttribute("test", testRepository.findById(id).get());
+        model.addAttribute("students", studentRepository.findAll());
         return "testform";
     }
 
